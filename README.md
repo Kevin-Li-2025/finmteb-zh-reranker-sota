@@ -59,6 +59,15 @@ Final frozen setup:
 | `reports/qwen3_reranker_8b_zh_true_logit_blend_strategy_v1_test.json` | Current best test result |
 | `reports/public_reranking_zh_snapshot_comparison.md` | Public leaderboard snapshot comparison |
 
+## CI
+
+GitHub Actions runs on every push and pull request to `main`:
+
+- Python 3.10 and 3.12
+- `ruff check .`
+- `python -m compileall -q src scripts tests`
+- `python -m pytest -q`
+
 ## Setup
 
 Use Python 3.10, 3.11, or 3.12 on the GPU machine.
