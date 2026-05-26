@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    name: Build release artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Build Python package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build
+          python -m build
+
+      - name: Build source archive
+        run: |
+          archive="finmteb-zh-reranker-sota-${GITHUB_REF_NAME}.zip"
+          zip -qr "$archive" . \
+            -x ".git/*" \
+            -x ".pytest_cache/*" \
+            -x ".ruff_cache/*" \
+            -x ".venv/*" \
+            -x "**/__pycache__/*" \
+            -x "reports/score_cache/*" \
+            -x "outputs/*" \
+            -x "wandb/*"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: finmteb-zh-reranker-sota-${{ github.ref_name }}
+          path: |
+            dist/*
+            finmteb-zh-reranker-sota-${{ github.ref_name }}.zip
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*
+            finmteb-zh-reranker-sota-${{ github.ref_name }}.zip
