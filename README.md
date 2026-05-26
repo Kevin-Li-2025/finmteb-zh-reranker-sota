@@ -69,6 +69,8 @@ GitHub Actions CI runs on every push and pull request to `main`:
 - `python -m compileall -q src scripts tests`
 - `python -m pytest -q`
 
+The CI badge at the top of this README tracks `.github/workflows/ci.yml`.
+
 The release workflow runs on `v*` tags or manual dispatch:
 
 - builds wheel and source distribution
