@@ -48,6 +48,8 @@ Current best JSON outputs:
 - `reports/qwen3_reranker_8b_zh_true_logit_blend_strategy_v1.json`
 - `reports/qwen3_reranker_8b_zh_true_logit_blend_strategy_nested_cv_v1.json`
 - `reports/qwen3_reranker_8b_zh_true_logit_blend_strategy_v1_test.json`
+- `reports/public_reranking_zh_snapshot_comparison.md`
+- `reports/public_reranking_zh_snapshot_comparison.json`
 
 Previous verified baseline:
 

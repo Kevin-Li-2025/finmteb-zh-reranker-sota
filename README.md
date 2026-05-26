@@ -15,7 +15,9 @@ On the L20 box, `Qwen/Qwen3-Reranker-8B` with `true_logit` scoring and per-query
 RRF lexical fusion reached `0.997807` MAP average on `Reranking_zh`, above the
 official `benchmark.xlsx` snapshot top average of `0.993100`.
 
-See `RESULTS.md` for exact scores, commands, and environment details.
+See `RESULTS.md` for exact scores, commands, and environment details. The
+public snapshot comparison is recorded in
+`reports/public_reranking_zh_snapshot_comparison.md`.
 
 ## Setup
 
