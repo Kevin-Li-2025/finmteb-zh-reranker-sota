@@ -1,9 +1,38 @@
-# FinMTEB SOTA Reranker
+# FinMTEB ZH Reranker SOTA
+
+[![FinanceMTEB Reranking_zh](https://img.shields.io/badge/FinanceMTEB_Reranking__zh-0.9978_MAP-2ea44f)](reports/public_reranking_zh_snapshot_comparison.md)
+[![Public Snapshot SOTA](https://img.shields.io/badge/Public_snapshot-SOTA-blue)](reports/public_reranking_zh_snapshot_comparison.md)
+[![Model](https://img.shields.io/badge/Model-Qwen3--Reranker--8B-black)](https://huggingface.co/Qwen/Qwen3-Reranker-8B)
+[![Tests](https://img.shields.io/badge/tests-12_passing-brightgreen)](tests)
+
+Public snapshot SOTA finance-domain Chinese reranking system for
+FinanceMTEB `Reranking_zh`.
+
+## Result
 
 This project targets the FinanceMTEB Chinese reranking slice:
 
 - `FinanceMTEB/FinEvaRetrieval-reranking`
 - `FinanceMTEB/DISCFinLLM-reranking`
+
+On the L20 box, `Qwen/Qwen3-Reranker-8B` with `true_logit` scoring and per-query
+RRF lexical fusion reached `0.997807` MAP average on `Reranking_zh`, above the
+official `benchmark.xlsx` snapshot top average of `0.993100`.
+
+| Benchmark | Public snapshot best | This repo | Delta |
+| --- | ---: | ---: | ---: |
+| `Reranking_zh` Avg. MAP | 0.993100 | 0.997807 | +0.004707 |
+| `FinEvaReranking` MAP | 0.990600 | 1.000000 | +0.009400 |
+| `DISCFinLLMReranking` MAP | 0.995600 | 0.995614 | +0.000014 |
+
+Supported claim: new SOTA on the public FinanceMTEB `Reranking_zh` benchmark
+snapshot. Official leaderboard inclusion is pending maintainer review.
+
+See `RESULTS.md` for exact scores, commands, and environment details. The
+public snapshot comparison is recorded in
+`reports/public_reranking_zh_snapshot_comparison.md`.
+
+## Method
 
 The achieved SOTA path is:
 
@@ -11,13 +40,24 @@ The achieved SOTA path is:
 2. Run a zero-shot Qwen3 reranker with train-only score-mode and rank-fusion selection.
 3. Freeze the selected strategy, then evaluate on untouched test splits.
 
-On the L20 box, `Qwen/Qwen3-Reranker-8B` with `true_logit` scoring and per-query
-RRF lexical fusion reached `0.997807` MAP average on `Reranking_zh`, above the
-official `benchmark.xlsx` snapshot top average of `0.993100`.
+Final frozen setup:
 
-See `RESULTS.md` for exact scores, commands, and environment details. The
-public snapshot comparison is recorded in
-`reports/public_reranking_zh_snapshot_comparison.md`.
+- Base model: `Qwen/Qwen3-Reranker-8B`
+- Inference: 4-bit on NVIDIA L20 46 GB
+- Score mode: raw `true` token logit
+- Fusion: per-query RRF with lexical features
+- Selection policy: train-only search/CV, frozen test evaluation
+
+## Repository Map
+
+| Path | Purpose |
+| --- | --- |
+| `src/finmteb_sota/` | Dataset loading, scoring, metrics, lexical features, score caching |
+| `scripts/search_blend_strategy.py` | Train-only score-mode and RRF strategy search |
+| `scripts/eval_blend_strategy.py` | Frozen strategy evaluation on test |
+| `scripts/validate_blend_strategy_cv.py` | Train-only CV audit |
+| `reports/qwen3_reranker_8b_zh_true_logit_blend_strategy_v1_test.json` | Current best test result |
+| `reports/public_reranking_zh_snapshot_comparison.md` | Public leaderboard snapshot comparison |
 
 ## Setup
 

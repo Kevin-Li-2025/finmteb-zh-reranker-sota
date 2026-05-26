@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "finmteb-sota-reranker"
 version = "0.1.0"
-description = "Reproducible FinanceMTEB Chinese reranker training and evaluation."
+description = "Public snapshot SOTA Chinese finance reranker for FinanceMTEB Reranking_zh."
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
 dependencies = [
@@ -39,10 +39,14 @@ dev = [
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[project.urls]
+Repository = "https://github.com/Kevin-Li-2025/finmteb-zh-reranker-sota"
+Results = "https://github.com/Kevin-Li-2025/finmteb-zh-reranker-sota/blob/main/RESULTS.md"
+Comparison = "https://github.com/Kevin-Li-2025/finmteb-zh-reranker-sota/blob/main/reports/public_reranking_zh_snapshot_comparison.md"
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-
