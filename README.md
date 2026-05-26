@@ -2,8 +2,8 @@
 
 [![FinanceMTEB Reranking_zh](https://img.shields.io/badge/FinanceMTEB_Reranking__zh-0.9978_MAP-2ea44f)](reports/public_reranking_zh_snapshot_comparison.md)
 [![Public Snapshot SOTA](https://img.shields.io/badge/Public_snapshot-SOTA-blue)](reports/public_reranking_zh_snapshot_comparison.md)
-[![CI](https://github.com/Kevin-Li-2025/finmteb-zh-reranker-sota/actions/workflows/ci.yml/badge.svg)](https://github.com/Kevin-Li-2025/finmteb-zh-reranker-sota/actions/workflows/ci.yml)
-[![Release](https://github.com/Kevin-Li-2025/finmteb-zh-reranker-sota/actions/workflows/release.yml/badge.svg)](https://github.com/Kevin-Li-2025/finmteb-zh-reranker-sota/actions/workflows/release.yml)
+[![CI](https://img.shields.io/github/checks-status/Kevin-Li-2025/finmteb-zh-reranker-sota/main?label=CI)](https://github.com/Kevin-Li-2025/finmteb-zh-reranker-sota/commits/main)
+[![CD](https://img.shields.io/badge/CD-release_workflow_configured-blue)](.github/workflows/release.yml)
 [![Model](https://img.shields.io/badge/Model-Qwen3--Reranker--8B-black)](https://huggingface.co/Qwen/Qwen3-Reranker-8B)
 
 Public snapshot SOTA finance-domain Chinese reranking system for
